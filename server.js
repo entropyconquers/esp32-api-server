@@ -25,6 +25,11 @@ app.get('/api/command', (req, res) => {
     res.json(command);
 });
 
+app.get('/api', (req, res) => {
+    //hello world
+    res.send('Hello World');
+});
+
 // PUT endpoint to update the command
 app.put('/api/command', (req, res) => {
     const { written } = req.body;
