@@ -1,13 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const TelegramBot = require('node-telegram-bot-api');
+require('dotenv').config();
 
 // Create an Express application
 const app = express();
 const port = 3000;
 
 // Telegram Bot setup
-const token = '6868546627:AAE_B_rxm6cKya4gOvzPeNBQRWjgpmTlu-8'; // Replace with your bot token
+const token = process.env.BOT_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
 
 // Middleware to parse JSON bodies
