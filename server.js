@@ -17,8 +17,10 @@ app.use(bodyParser.json());
 // Initial state
 let command = {
     text: "",
-    written: true
+    written: true,
+    windows: false
 };
+
 
 // GET endpoint to retrieve the command
 app.get('/api/command', (req, res) => {
@@ -65,7 +67,39 @@ bot.onText(/\/set([\s\S]+)/, (msg, match) => {
     command.written = false;
 
     // Notify the user
-    bot.sendMessage(chatId, 'Command has been updated.');
+    bot.sendMessage(chatId, 'Sent text to keyboard.');
+});
+// on text windows
+bot.onText(/\/windows/, (msg) => {
+    const chatId = msg.chat.id;
+
+    // Update command from Telegram message
+    command.windows = true;
+
+    // Notify the user
+    bot.sendMessage(chatId, 'Changed to windows.');
+});
+//on text mac
+bot.onText(/\/mac/, (msg) => {
+    const chatId = msg.chat.id;
+
+    // Update command from Telegram message
+    command.windows = false;
+
+    // Notify the user
+    bot.sendMessage(chatId, 'Changed to mac.');
+});
+
+//on stop command
+bot.onText(/\/stop/, (msg) => {
+    const chatId = msg.chat.id;
+
+    // Update command from Telegram message
+    command.text = "";
+    command.written = true;
+
+    // Notify the user
+    bot.sendMessage(chatId, 'Stopped the command.');
 });
 
 // Start the server
